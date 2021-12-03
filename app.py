@@ -1,11 +1,7 @@
 import base64
-from flask import Flask, jsonify, request
+from flask import current_app as app, jsonify, request
 from functools import wraps
-
-from flask.wrappers import Response
-
-app = Flask(__name__)
-app.config.from_pyfile('settings.py')
+from flask_sqlalchemy import SQLAlchemy
 
 def basic_auth_check(auth_header:str) -> bool:
     user = "aaron.williams"
@@ -15,7 +11,7 @@ def basic_auth_check(auth_header:str) -> bool:
         return True
     return False
 
-def login_required(func):
+def basic_auth_required(func):
     @wraps(func)
     def security_check(*args, **kwargs):
         auth_header = request.headers.get('Authorization')
@@ -32,10 +28,13 @@ def home():
     return jsonify(message)
 
 @app.route('/basic_auth')
-@login_required
+@basic_auth_required
 def basic_auth():
     message = {'message':'Welcome to the basic_auth authenticated endpoint!'}
     return jsonify(message)
+
+#@app.route('/jwt')
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=9000)
