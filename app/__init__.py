@@ -7,4 +7,4 @@ app.config.from_pyfile('../settings.py')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import routes, models
+from app import auth, models, routes
