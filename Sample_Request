@@ -1,0 +1,8 @@
+GET /jwt_auth HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibmFtZSI6ImJ1Z3NidW5ueSJ9.yy1zWJqk0YL7gLHxGul7Dh9rJckMHPFn7Oa0hNm3s7o
+User-Agent: PostmanRuntime/7.28.4
+Accept: */*
+Postman-Token: 8274d5db-63f7-4ef3-8753-130a5f3e3133
+Host: app.site
+Accept-Encoding: gzip, deflate
+Connection: close

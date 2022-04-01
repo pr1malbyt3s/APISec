@@ -42,7 +42,9 @@ def basic_auth_required(func):
 def jwt_token_required(func):
     def jwt_check(auth_header:str) -> bool:
         encoded_token = auth_header.split()[-1]
-        decoded_token = jwt.decode(encoded_token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        #decoded_token = jwt.decode(encoded_token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        # Signature not being verified here:
+        decoded_token = jwt.decode(encoded_token, algorithms=['HS256'])
         auth_user = User.query.filter_by(id=decoded_token['id']).first()
         if(auth_user):
             return True
